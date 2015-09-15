@@ -2,6 +2,23 @@
 Inferring user activity and mobility in LBSNs
 ______________________________
 
+[intro]
+paper and some introduction
+- 20150830 infering activity.pdf
+口試用的slide，有詳細介紹及model建構方式舉例
+
+- 20150908 experiment results_geotext.pdf
+針對geotext這個dataset的實驗結果圖。
+
+- NCTU_yuwen_0909_v4.pdf
+model的想法介紹，及公式推導等。
+
+[codes]
+- NOTE: input 指令在code的前五行會寫，用#註解的部分
+要執行檔案時可先find "write.table"，這部分需要設定write.table(file="PATH")寫出檔案的位置
+原始timeslot length設定在1~4hour，如需改變及在main_my_method.R and build_model_my_method.R那邊將n值改成需要的length
+
+
 - logger_jsonRawDataToTxtFile.R
 把原始json檔的check-in data只取出所需的time, lon, lat, userID等資訊，另存成文字檔
 
@@ -73,6 +90,7 @@ ______________________________
 - 實驗資料較大時，會把資料分成file1~file38
 code裡面會有file_num，這邊指的就是分割後的第幾個file
 
+[models]
 - GeoText_Model_factorization.Rda
 已建好的model，這是baseline 方法NMF
 time slot length:動態設定1~4小時
@@ -80,3 +98,4 @@ time slot length:動態設定1~4小時
 - GeoText_Model_order1.Rda
 已建好的model，是我的方法
 time slot length:動態設定1~4小時
+
