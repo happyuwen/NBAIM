@@ -46,10 +46,10 @@ act_act<-matrix(nrow = 10, ncol = 10,
   testing_all$lon<-as.numeric(testing_all$lon)
   testing_all$lat<-as.numeric(testing_all$lat)
 
-  file_100<-file_all[which(file_all$Freq>=70),]
+  file_100<-file_all[which(file_all$Freq>=10),]
   file_all<-file_100
 
-  testing_100<-testing_all[which(testing_all$Freq>=70),]
+  testing_100<-testing_all[which(testing_all$Freq>=10),]
   testing_all<-testing_100
   print(paste("file_all =",nrow(file_all), ", nrow(testing_all) =",nrow(testing_all)))
   
