@@ -68,3 +68,6 @@ ______________________________
 - draw_movility_v2.R
 plot the experiment results including CDF, barplot and line plot, error bar
 
+______________________________
+- 實驗資料較大時，會把資料分成file1~file38
+code裡面會有file_num，這邊指的就是分割後的第幾個file
