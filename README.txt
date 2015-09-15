@@ -1,5 +1,6 @@
 # NBAIM
 Inferring user activity and mobility in LBSNs
+______________________________
 
 - logger_jsonRawDataToTxtFile.R
 把原始json檔的check-in data只取出所需的time, lon, lat, userID等資訊，另存成文字檔
@@ -71,3 +72,11 @@ plot the experiment results including CDF, barplot and line plot, error bar
 ______________________________
 - 實驗資料較大時，會把資料分成file1~file38
 code裡面會有file_num，這邊指的就是分割後的第幾個file
+
+- GeoText_Model_factorization.Rda
+已建好的model，這是baseline 方法NMF
+time slot length:動態設定1~4小時
+
+- GeoText_Model_order1.Rda
+已建好的model，是我的方法
+time slot length:動態設定1~4小時
