@@ -59,6 +59,9 @@ ______________________________
 # online testing: infferring user mobility part
 
 - KDE.R
+baseline method
+kernel density estimation
+
 - main_kde.R
 ______________________________
 # barplot and curves
