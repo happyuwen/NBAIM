@@ -139,15 +139,16 @@ ______________________________
     geotext_likelihood_both_60.txt
     geotext_likelihood_both_80.txt
   structure:(userID,likelihood of kde, likelihood of NBAIM)，每列代表一個user的結果
-  
+
+- Note: 這部分主要是在桌機的Rstudio畫的。
 ______________________________
 [server]
 path: /home/happyuwen/~
 code: /home/happyuwen/R/R/bin
 data: /home/happyuwen/GeoText/experiment_v2 (including training and testing file )
       /home/happyuwen/Gowalla/gowalla_v3/catch_category/ (check-in少於100筆的那些user的data)更新中
-      /home/happyuwen/Gowalla/gowalla_v3/training/ 因檔案過大，分割後的training data
-      /home/happyuwen/Gowalla/gowalla_v3/testing/ 因檔案過大，分割後的testing data
+      /home/happyuwen/Gowalla/gowalla_v3/training/ 因檔案過大，分割後的training data(最低打卡數為100)
+      /home/happyuwen/Gowalla/gowalla_v3/testing/ 因檔案過大，分割後的testing data(最低打卡數為100)
       /home/happyuwen/Gowalla/gowalla_v3/gowalla_all.txt 總資料
       /home/happyuwen/Gowalla/gowalla_v3/gowalla_less100.txt 少於一百筆打卡資料的那些user的資料
       /home/happyuwen/Gowalla/gowalla_v3/gowalla_10to100.txt 介於十到一百筆打卡資料的那些user的資料
