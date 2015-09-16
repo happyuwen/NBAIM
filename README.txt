@@ -99,7 +99,48 @@ ______________________________
   已建好的model，是我的方法
   time slot length:動態設定1~4小時
   每個user的model裡面會記錄
-
+______________________________
+[plot]
+- plot_n_freq.R
+  畫fig4.1(a)
+  會用到geotext_acc.txt
+  structure:("ID","Freq","NB","SVM","NMF","CLAR","NBAIM","n")
+    "ID": user ID
+    "Freq": how many check-ins the user checks
+    "NB","SVM","NMF","CLAR","NBAIM": the accuracy with respect to the methods
+    "n": time slot length
+    
+- acc_Freq.R
+  畫fig4.1(b)
+  會用到geotext_acc.txt
+  structure:同上
+  
+- acc_cate_bar.R
+  畫fig4.2(a)
+  會用到geotext_acc_categpry.txt
+  structure: 
+    每列代表一個方法，分別為"NB","SVM","NMF","CLAR","NBAIM"；每行代表一個categor，共十個。其值代表accuracy
+  
+- draw_CDF.R
+  畫Fig.4.2(b)
+  會用到geotext_acc.txt
+  structure:("ID","Freq","NB","SVM","NMF","CLAR","NBAIM","n")
+    "ID": user ID
+    "Freq": how many check-ins the user checks
+    "NB","SVM","NMF","CLAR","NBAIM": the accuracy with respect to the methods
+    "n": time slot length
+  
+- draw_experiment_result.R
+  畫Fig.4.3(a)~(e)
+  會用到以下檔案:
+    geotext_likelihood_both.txt所有的likelihood
+    geotext_likelihood_both_20.txt 打卡數有20筆當成training data的user的likelihood
+    geotext_likelihood_both_40.txt
+    geotext_likelihood_both_60.txt
+    geotext_likelihood_both_80.txt
+  structure:(userID,likelihood of kde, likelihood of NBAIM)，每列代表一個user的結果
+  
+______________________________
 [server]
 path: /home/happyuwen/~
 code: /home/happyuwen/R/R/bin
