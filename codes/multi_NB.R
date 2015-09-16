@@ -41,10 +41,10 @@ c<-c("Arts & Entertainment","Colleges & Universities","Events","Food","Nightlife
 	testing_all$hour<-as.numeric(testing_all$hour)
 	file_all$day<-as.numeric(file_all$day)
 	testing_all$day<-as.numeric(testing_all$day)
-	file_all$lon<-as.numeric(file_all$lon)
-	testing_all$lon<-as.numeric(testing_all$lon)
-	file_all$lat<-as.numeric(file_all$lat)
-	testing_all$lat<-as.numeric(testing_all$lat)
+	file_all$lon<-as.numeric(data.matrix(file_all$lon))
+	testing_all$lon<-as.numeric(data.matrix(testing_all$lon))
+	file_all$lat<-as.numeric(data.matrix(file_all$lat))
+	testing_all$lat<-as.numeric(data.matrix(testing_all$lat))
 
 	testing_all[,14]<-NA
 	colnames(testing_all)[14]<-"NB"
