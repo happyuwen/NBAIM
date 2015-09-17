@@ -117,7 +117,7 @@ ______________________________
   
 - acc_cate_bar.R
   畫fig4.2(a)
-  會用到geotext_acc_categpry.txt
+  會用到geotext_acc_category.txt
   structure: 
     每列代表一個方法，分別為"NB","SVM","NMF","CLAR","NBAIM"；每行代表一個categor，共十個。其值代表accuracy
   
