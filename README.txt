@@ -112,7 +112,7 @@ ______________________________
     
 - acc_Freq.R
   畫fig4.1(b)
-  會用到geotext_acc.txt
+  會用到geotext_acc_trainingSize.txt
   structure:同上
   
 - acc_cate_bar.R
