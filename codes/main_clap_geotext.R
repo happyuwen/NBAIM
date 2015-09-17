@@ -3,7 +3,7 @@ library("geosphere")
 source("matrix_factorization.R")
 source("accuracy.R")
 source("CDF.R")
-source("ALGO_CLAR.R")
+#source("ALGO_CLAR.R")
 
 # Rscript main_clap_geotext.R '/home/happyuwen/GeoText/experiment_v2/geotext_training' '/home/happyuwen/GeoText/experiment_v2/geotext_testing' '/home/happyuwen/GeoText/experiment_v2/geotext_result_CLAR.txt' '/home/happyuwen/GeoText/experiment_v2/geotext_acc_CLAR.txt' '/home/happyuwen/GeoText/experiment_v2/geotext_cdf_CLAR.txt'
 
@@ -116,7 +116,7 @@ print(c)
     W_transpose <- R$Q
     location_activity<-U %*% v_transpose
     ####
-    location_activity<-ALGO_CLAR(location_activity,location_feature,act_act)
+    #location_activity<-ALGO_CLAR(location_activity,location_feature,act_act)
     ####
     print("location_activity is ready")
     #### testing stage ####
