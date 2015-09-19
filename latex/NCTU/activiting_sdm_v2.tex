@@ -1,0 +1,99 @@
+%%!TEX TS-program = latex
+\documentclass[a4paper,12pt]{report}
+%\usepackage{ltexpprt}
+\usepackage{listings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{epsfig}
+\usepackage[ruled]{algorithm2e}
+\usepackage{setspace}
+\usepackage{url}
+\usepackage{cases}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{algorithmic}
+\usepackage{eso-pic}
+
+
+
+
+%\graphicspath{{figure/}}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{proposition}{Proposition}
+%\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+%\newtheorem{example}{Example}
+\renewcommand{\arraystretch}{1}
+\newcommand\MyAtPageCenter[1]{\AtPageUpperLeft{%
+\put(\LenToUnit{.34\paperwidth},\LenToUnit{-.55\paperheight}){#1}}%
+}
+\AddToShipoutPictureBG{\MyAtPageCenter{\includegraphics[scale=0.35]{figures/logo.eps}}}
+
+
+
+\renewcommand\theequation{\arabic{equation}}
+\renewcommand\thetable{\arabic{table}}
+
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+\renewcommand{\labelenumi}{\arabic{enumi})}
+
+\doublespacing
+
+\begin{document}
+
+
+\newpage
+\pagenumbering{roman}
+\setcounter{page}{5}
+\tableofcontents
+\newpage
+\listoffigures
+\listoftables
+
+
+
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%\setcounter{page}{1}%Leave this line commented out.
+
+%\begin{abstract} %\small\baselineskip=9pt
+
+%With the popularity of location-based social networks (LBSNs), users would like to share their check-ins to their friends for more social interactions. These check-in records reflect not only when and where they are but also what are they doing. If we can capture user activity and mobility features in LBSNs, the location social platform can provide more personalized location-based services for users. In this paper, we aim to infer individual user activity and mobility based on their check-in records in LBSNs. To infer individual activities, given a user, a location and a specific time, we propose a Bayesian-basd approach to evaluate the probability of the user performing an activity at the given location and time. Moreover, to infer individual mobility, given a user, an activity and a specific time, we can also utilize the above approach to derive the location distribution of the user performing the given activity at the given time. Our proposed Bayesian-based approach contains two major components, activity-time and location-activity model. We analyze the relations between activity and time, location and activity from check-in records. Then, we utilize Gaussian mixture model and {\color{red} Markov based} techniques to model the location-activity and activity-time relations, respectively. In the experiments, we select two real datasets, and the experimental results show that our proposed Bayesian-based approach has higher accuracy than the state-of-the-art approaches for activity inference. 
+
+%\end{abstract}
+
+
+%\begin{proof}  XXX \end{proof}
+%\begin{Definition} XXX \end{Definition}
+%\begin{theorem} XXX \end{theorem}
+%\begin{lemma} XXX \end{lemma}
+
+%\chapter{Abstract (Chinese Version)}
+%\chapter{Abstract (English Version)}
+%\chapter{Acknowledgement}
+%\chapter{Contents}
+%\chapter{List of Fetures}
+%\chapter{List of Tables}
+\input{1_introduction_v2}
+\input{3_problem_v2}
+\input{4_inference_v2}
+\input{5_evaluation_v2}
+\input{2_related_v2}
+\input{6_conclusion_v2}
+
+%\section*{Acknowledgment}
+
+
+\bibliographystyle{abbrv}
+\bibliography{activiting_sdm}
+
+\end{document}
+
+% End of ltexpprt.tex
