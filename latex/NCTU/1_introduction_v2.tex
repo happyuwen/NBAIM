@@ -1,0 +1,34 @@
+\chapter{Introduction}
+\label{sec:1}
+
+%{\color{red} needs check again}
+
+With the increasing of location-aware techniques equipped mobile devices, many location-based social networks (LBSNs) provide users to check-in at a location to share to their friends for more social interactions, such as Facebook\footnote{https://www.facebook.com/}, Twitter\footnote{https://twitter.com/} and Foursquare\footnote{https://foursquare.com/}. When users check-in at a location, they can leave some text information in their check-ins, such as tags and text messages.  The text information sometimes describe what is the user doing when he/she checks-in at a location. Thus, the check-in message contains not only the spatial-temporal information but also the text information.
+
+
+
+To provide personalized location-based services in LBSNs, such as coupons and ads, two problems have to be solved. One is to know whether a user performs the given activity at a specific time and location. For example, a restaurant would like to find who will have lunch or dinner near by the restaurant, and it has higher probability to promote the meal coupon to him or her successfully. The other is to know where a user may perform the given activity at a specific time. For example, a restaurant chain would like to know where a user will have lunch or dinner, and promotes the near restaurants to the user. Figure \ref{fig:problem} shows an example. The user has two check-in records at $\ell_1$ and $\ell_2$ at $t_1$ and $t_2$, respectively. If a coupon is available at $t_3$ at $\ell_3$, the shop will decide whether promote the user if the user activity matches the type of shop, such as dining and restaurant. Furthermore, a shopping center chain want to know where is the user at $t_4$, and then it can promote near shop to this user for shopping.
+
+
+Prior works \cite{13_KDD_Yuan} utilize Bayesian network to model the relations among user, location, time and activity in Twitter. In \cite{13_KDD_Yuan}, the network structure consists of user, location, region, time, weekend/weekday, words and topics. However, \cite{13_KDD_Yuan} only counts and extracts the representative words. It is hard to extract the same activities in different languages with different characters. To more precise capture user activities, \cite{10_AAAI_Peebles} clusters user labels to activity labels. Some natural language processing works focus on extract topics or activities from text, such as Latent Dirichlet allocation (LDA) topic model \cite{10_WSDM_Sizov}. Moreover, crowdsourcing is another way to extract activities from text precisely \cite{13_MUM_Zhu}. Thus, we assume the activity are already extracted from other precise methods to against different language text in LBSNs. To the best of our knowledge, in LBSNs, prior works focus on discovering spatial-temporal relations \cite{11_ICWSM_Noulas}\cite{11_KDD_Cho}\cite{11_SIGIR_Ye} or geographical topics \cite{12_WWW_Hong}\cite{10_WWW_Zheng}. Furthermore, in \cite{11_KDD_Ye}, the authors try to discover tags of locations in an LBSN. However, the tags of locations are for global users. It can not reflect individual location preference. For example, there are sport field, food court and office in a college. Thus, we will take the spatial, temporal and activity factor into account for individual activity and mobility influence problem.
+
+\begin{figure}[t]
+\centering
+\epsfig{file=figures/problem.eps,width=0.97\linewidth}
+\caption{User's check-in records and activities in an LBSN}
+\label{fig:problem}
+\end{figure}
+
+
+In this paper, we aim to infer individual activity and mobility based on their check-in records in LBSNs. Our idea is to utilize Bayesian theorem \cite{11_Book_Han} to evaluate the probability of user $u$ performing an activity $a$ at location $\ell$ at time $t$ and the location distribution of user $u$ performing an activity $a$ at time $t$. To evaluate the distributions, we propose a Bayesian-based approach to simply the probability equation and get the approximation. This approach exploits Bayesian network structure which consists of the relations among time, location and activity factors. After the simplified equation, there are two major components we have to deal with. One is the relation between location and activity. The other is the relation between activity and time. First, to infer the mobility based on activity, we utilize Gaussian mixture model (GMM) to capture spatial preference of user with different activities. Second, to infer the activity at a specific time, we propose the Activity Transition Model to infer user activity at a specific time.
+
+In summary, our major contributions are outlined as follows:
+\begin{itemize}
+\item We formulate the individual activity and mobility inference problem for personalized location-based services in LBSNs.
+\item We utilize Bayesian network to describe the relations among spatial, temporal and activity factors.
+\item We proposed a Bayesian-based approach for activity and mobility influence in LBSNs based on our proposed Bayesian network structure.
+\item We conduct comprehensive experiments on a real dataset, and the experimental results show that our proposed methods have higher performance than the state-of-the-art approaches.
+\end{itemize}
+
+
+The rest of this paper is organized as follows. Section \ref{sec:3} defines the problem, and Section \ref{sec:4} shows the details of our proposed methods for activity inference in an LBSN. Section \ref{sec:5} shows the performance evaluation on a real dataset. Section \ref{sec:2} gives an overview of related works. Finally, Section \ref{sec:6} concludes this paper.
