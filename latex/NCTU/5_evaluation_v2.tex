@@ -1,0 +1,137 @@
+\chapter{Performance Evaluation}
+\label{sec:5}
+
+
+\section{Datasets Description}
+\label{sec:5-1}
+
+In this paper, we select the dataset, GeoText, for evaluating our proposed methods. The detail descriptions of the dataset are as follows:
+
+{\bf GeoText\footnote{The dataset is also adopted by \cite{13_KDD_Yuan}.}:} The GeoText dataset\footnote{http://www.ark.cs.cmu.edu/GeoText/} is collected from Twitter over one week in March 2010 \cite{10_EMNLP_Eisenstein}. There are 9,475 users and 377,616 messages which have geographic information, and one user has 17 to 301 messages. Since we do not know the actual activity of each message, we use the location category instead of the activity. We use the location coordinate of each message to search the corresponding category via Foursquare API\footnote{https://api.foursquare.com/v2/venues/search}, and select the first level category name as the activity. There are ten categories in the first level categories, Arts \& Entertainment, Colleges \& Universities, Events, Food, Nightlife Spots, Outdoors \& Recreation, Professional \& Other Places, Residences, Shops \& Services and Travel \& Transport. Table \ref{table:dataset} shows the statistics in details, and Table \ref{fig:distri_activity} shows the activity distribution in the GeoText dataset.
+%{\color{red} 
+%{\bf Gowalla:} The Gowalla dataset is collected from October 2009 to September 2010. There are 196,591 users and more than 4,225,719 check-in messages, and maximum check-ins of a user is 2,175 messages. The right of Figure \ref{fig:distri_activity} shows the activity distribution in the GeoText dataset.
+
+
+
+\begin{table}[]
+\centering
+\caption{Statistics of two datasets}
+\label{table:dataset}
+\begin{tabular}{cr}
+\hline
+                              & \multicolumn{1}{c}{GeoText} \\ \hline
+\# of total users             & 9,475                       \\
+\# of check-ins               & 377,616                     \\
+\# of distinct locations      & 46,320                      \\
+Max \# of check-ins of a user & 301                         \\
+Min \# of check-ins of a user & 17                          \\
+Period                        & March 2010                  \\ \hline
+\end{tabular}
+\end{table}
+
+
+\begin{table}[]
+\centering
+\caption{The proportion of each activity in GeoText Dataset}
+\label{fig:distri_activity}
+\begin{tabular}{cr}
+\hline
+Activity Type                     & \multicolumn{1}{c}{GeoText} \\ \hline
+Arts \& Entertainment (AE)        & 15,892                      \\
+Colleges \& Universities (CU)     & 16,697                      \\
+Events (E)                        & 106                         \\
+Food (F)                          & 46,332                      \\
+Nightlife Spots (NS)              & 16,207                      \\
+Outdoors \& Recreation (OR)       & 39,832                      \\
+Professional \& Other Places (PO) & 110,108                     \\
+Residences (R)                    & 24,387                      \\
+Shops \& Services (SS)            & 86,526                      \\
+Travel \& Transport (TT)          & 21,520                      \\ \hline
+\end{tabular}
+\end{table}
+
+
+\section{Impact of Time Slot Length}
+\label{sec:5-2}
+
+\begin{figure}
+\centering
+\subfigure[Impact of time slot length]{
+\label{fig:impactN}
+\epsfig{file=figures/avgTLength_Freq_geotext.eps,width=0.475\linewidth}
+}
+\subfigure[Average accuracy vs. training size]{
+\label{fig:actSize}
+\epsfig{file=figures/acc_size_category.eps,width=0.475\linewidth}
+}
+\caption{Impact of time slot length and the training size}
+\end{figure}
+
+
+In this experiment, we test different length of time slots for the temporal feature. Figure \ref{fig:impactN} shows the experiment result on GeoText dataset. The x-axis of Figure \ref{fig:impactN} shows the number of training size from 20 check-ins to 100 check-ins, and the y-axis represents the average settings of time slot length and the standard deviation of those users whos training check-ins are 20, 40, 60, 80, and 100, respectively. It shows that the best setting of time slot length for most users is an hour desoite the traing size.
+
+
+\section{Comparison of Activity Inference Methods}
+\label{sec:5-3}
+In this section, we will compare our Network Based Activity Inference Model(NBAIM) with the state-of-the-art approaches. First, we introduce the concepts of our baseline methods. Then, we will show the experiment results.
+
+{\bf Baseline Methods}
+We have four baseline methods to evaluate our proposed approach, namely Naive Bayesian(NB), support vector machine(SVM), non-negative matrix factorization(NMF), and collaborative location and activity recommendations\cite{10_WWW_Zheng}(CLAR). 
+
+
+
+Figure \ref{fig:actSize} compares NBAIM with the baseline methods by calculating the average accuracy of users who have 10 to 100 training check-ins, respectively. Each line represents a baseline approach. From this experiment, we can see that even when there are only 10 training check-ins, NBAIM have almost 80\% accuracy, outperforming the other approaches. That is, even though the training data size of a user is very small, NBAIM can at least 70\% precisely infer user activities.
+
+\begin{figure}
+\centering
+\subfigure[Average accuracy vs. categories]{
+\label{fig:actCate}
+\epsfig{file=figures/acc_cate_bar_geotext.eps,width=0.475\linewidth}
+}
+\subfigure[The CDF of accuracy]{
+\label{fig:actCdf}
+\epsfig{file=figures/cdf_acc_geotext.eps,width=0.475\linewidth}
+}
+\caption{Comparison of activity inference methods}
+\end{figure}
+
+Figure \ref{fig:actCate} shows the average accuracy on different categories. The x-axis of Figure \ref{fig:actCate} represents the ten categories, and the y-axis shows the average accuracy. Each bar with different colors represent different methods. It shows that NBAIM approach outperform the other methods for each category. For each category, the predictive accuracy are 70\% or more.
+
+
+Figure \ref{fig:actCdf} shows the cumulative distribution function of accuracy. It shows that there are 50\% or more users have 88\% or more accuracy.
+
+\section{Comparison of Location Inference Methods}
+\label{sec:5-4}
+
+\begin{figure*}[!ht]
+\centering
+\subfigure[]{
+    \epsfig{file=figures/likeli_cate_geotext_20.eps,width=0.475\linewidth}
+    \label{fig:compare_baseline_mobility_20}
+}
+\subfigure[]{
+    \epsfig{file=figures/likeli_cate_geotext_40.eps,width=0.475\linewidth}
+    \label{fig:compare_baseline_mobility_40}
+}
+\subfigure[]{
+    \epsfig{file=figures/likeli_cate_geotext_60.eps,width=0.475\linewidth}
+    \label{fig:compare_baseline_mobility_60}
+}
+\subfigure[]{
+    \epsfig{file=figures/likeli_cate_geotext_80.eps,width=0.475\linewidth}
+    \label{fig:compare_baseline_mobility_80}
+}
+\subfigure[The average log-likelihood of users on categories]{
+	\epsfig{file=figures/likeli_cate_geotext.eps,width=0.475\linewidth}
+	\label{fig:compare_baseline_mobility_all}
+}
+\caption{Comparison of location inference methods}
+\label{fig:compare_baseline_mobility}
+\end{figure*}
+
+
+{\bf Baseline Method}
+We compare NBAIM with the baseline method which is kernel density estimation(KDE). That is, we utilize the kernel density estimation in the location-activity model, instead of using Gaussian Mixture Model. Similarly, we build a KDE model for each users and each activities. Besides, we compare the performance by calculating the average log-likelihood.
+
+Figure \ref{fig:compare_baseline_mobility} shows the average log-likelihood on ten categories when the training size are 20, 40, 60, and 80, respectively. The two bars with different colors represent different methods. From Figure \ref{fig:compare_baseline_mobility} and Figure \ref{fig:compare_baseline_mobility_all}, we can see that despite the training data size of each user, NBAIM outperforms KDE on all of the categories.
+

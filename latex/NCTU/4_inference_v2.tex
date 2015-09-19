@@ -1,0 +1,176 @@
+\chapter{Activity and Location Inference in LBSNs}
+\label{sec:4}
+
+\section{Relations among Time, Location and Activity}
+\label{sec:4-1}
+
+As we know, the mobility of users in LBSNs has regularity property \cite{11_KDD_Cho}, i.e. users may visit a location at a specific time. Users visit locations due to not only the time but also the activity. For example, a user goes to his office every morning, visits a cafeteria at noon, and then drives home in the evening. It seems like that user locations depend on the temporal feature. But if we investigate further, the user goes to his office and a cafeteria regardless of the time, but the activities, which are working and dining, respectively. In other words, the activity effect on location is much stronger than the temporal effect does. In consequence, we assume the time factor as the factor that influences user activities, while the user activities effects the geographical feature. Figure \ref{fig:network} shows the Bayesian network structure among these three factors based on above idea. The activity factor is related to the time factor, and the location factor is related to the activity factor.
+
+
+\begin{figure}[t]
+\centering
+\epsfig{file=figures/network.eps,width=0.5\linewidth}
+\caption{The Bayesian network structure describes the relation among time, activity and location factors}
+\label{fig:network}
+\end{figure}
+
+\section{Activity Inference, Deriving $P(a | u, \ell , t )$}
+\label{sec:4-2}
+
+Based on the Bayesian network structure mentioned in Section \ref{sec:4-1}, given user $u$, location $\ell$ and time $t$, the activity inference, $P(a | u, \ell , t )$, can be simply as following steps:
+
+\begin{align}
+\label{equ:activity_inference}
+P(a | u, \ell , t ) & = \frac{P(a, \ell, t | u)}{P( \ell , t | u)} \nonumber \\
+& \approx \frac{P(\ell | a, u) P(a | t, u) P (t | u)}{\sum_{a'}P(\ell | a',u)P(a'|t,u)P(t|u)} \nonumber \\
+& = \frac{P(\ell | a, u) P(a | t, u)}{\sum_{a'}P(\ell | a', u)P(a'|t, u)}
+\end{align}
+
+In Equation \ref{equ:activity_inference}, there are two major components, $P(\ell | a, u)$ and $P(a | t, u)$, which represent the locaion-activity correlation and time-activity correlation, respectively.
+
+
+\section{Mobility Inference, Deriving $P(\ell | a, t, u)$}
+\label{sec:4-3}
+
+Similar to Section \ref{sec:4-2}, given $u$, $a$ and $t$, the mobility inference, $P(\ell | a, t, u)$, can be simply as following steps:
+
+\begin{align}
+\label{equ:mobility_inference}
+P(\ell | a, t, u) & = \frac{P(\ell , a, t| u)}{P( a, t| u)} \nonumber \\
+& \approx \frac{P(\ell | a, u) P(a| t , u) P(t|u)}{\int_{\ell'} P(\ell' | a, u)P(a|t, u)P(t|u) \text{d} \ell'} \nonumber \\
+& = \frac{P(\ell | a, u)}{\int_{\ell'} P(\ell' | a, u)\text{d}\ell'} =P(\ell | a, u) 
+\end{align}
+
+From Equation \ref{equ:mobility_inference}, if we aim to infer individual mobility given user, activity and time factor, we could only take the activity factor into account for the approximation.
+
+\begin{figure*}[!ht]
+\centering
+\subfigure[Shop \& Service]{
+    \epsfig{file=figures/time_act_shop.eps,width=0.475\linewidth}
+    \label{fig:activity_time_a}
+}
+\subfigure[Nightlife Spot]{
+    \epsfig{file=figures/time_act_nightlife.eps,width=0.475\linewidth}
+    \label{fig:activity_time_b}
+}
+\subfigure[Outdoor \& Recreation]{
+    \epsfig{file=figures/time_act_outdoor.eps,width=0.475\linewidth}
+    \label{fig:activity_time_c}
+}
+\subfigure[Food]{
+    \epsfig{file=figures/time_act_food.eps,width=0.475\linewidth}
+    \label{fig:activity_time_d}
+}
+\caption{Temporal distribution over time, where the gray bar shows the frequency of each activity}
+\label{fig:activity_time}
+\end{figure*}
+
+\section{Time-Activity Model, $P(a | t, u)$}
+\label{sec:4-4}
+To evaluate time-activity model, $P(a | t, u)$, we observe the histogram of different activities over the time in a day in Figure \ref{fig:activity_time}. Figure \ref{fig:activity_time} shows that the user has significantly different  frequent patterns in one day under different activities. In \cite{06_WWW_Mei}, the authors exploit PLSA to infer spatial-temporal topics in social networks. In our work, we tackle only temporal activity inference in LBSNs. We think that the relations between activity and time are similar to the idea of collaborative filtering. The activity and time factor can be represented as different latent features. For example, the transportation activity is related to whether there is available train from office to home, and there are some available trains from office to home in the afternoon. Thus, the probability is higher when the activity is transportation in the afternoon. To solve this problem, the intuitive solution is non-negative matrix factorization. However, non-negative matrix factorization is not suitable to deal with the sparsity issue of check-in records. For example, suppose there are 4 activity types and six time slots. If a user doesn't have any check-in with activity 3 and 4, after performing the non-negative matrix factorization, the predictive probability of the user doing activity 3 and 4 might be higher than doing activity 1 and 2. However, the probability of the user doing activity 3 and 4 should be lower than doing activity 1 and 2, due to the zero record of check-ins of activity label 3 and 4.
+
+According to the above reson and idea, we propose a transition based technique to capture the latent features between activity and time factor.
+First, we calculate the frequency of the activity with respect to the different time slots. As we mentioned before, user activity may be effected by the previous one. Based on those frequency in these time slots, we build an Activity Transition Model to find out the transition from an activity to the other activity. From this activity transition model, we calculate the probability for each activity in different time slots.
+
+    In addition, people usually work from Monday to Friday and do some entertainment or shopping on the weekend. User activity differs on weekdays abd weekends. Therefore, we divide the original data into two parts, one is collected on weekdays, which means Monday to Friday, and the other is collected on weekends. 
+    
+
+
+
+
+\subsection{Activity Transition Model}
+The Activity Transition Mode captures the transition between each activity with respect to the previous one activity. The model is presented as below:
+\begin{equation}
+\label{equ:order1}
+M(a_p,a_f )=\frac{\Sigma_{i=1:24n}F(a_p,s_{i-1})\times F(a_f,s_i ) }{\Sigma_{a_f \in ACT} \Sigma_{i=1:24n}F(a_p,s_{i-1})\times F(a_f,s_i )} 
+\end{equation}
+ where $M(a_p,a_f )$ represents the probability of activity $a_f$ from activity $a_p$. $F(a_f,s_{i-1})$ shows the original frequency of activity $a_f$ in the $i-1$th time slot $s_{i-1}$, and $n$ is the number of hourly time slots, that is, $|s|=n$.
+
+
+With different size of time slot length and different number of time slots, some blanks will appear. For example, a user has check-in records at 12:23, 12:25, 13:22, and 13:35. If the time slot lenght is an hour for this period, the first two check-in records will be in slot 1, and the third and fourth records will be in slot 2. On the other hand, if there are four slots with length 30 minutes for each, the slot 2 will have no record. To fill in those empty slots, we calculate the probability by the Activity Transition Model for those empty slots.
+The equation is as below:
+\begin{equation}
+\label{equ:fill blank}
+C(a_f,s_i )=\frac{F(a_f,s_i)+\Sigma_{a_p\in ACT} F(a_p,s_{i-1})\times M(a_p,a_f)}{\Sigma_{a_f\in ACT}(F(a_f,s_i)+\Sigma_{a_p\in ACT}F(a_p,s_{i-1})\times M(a_p,a_f))}
+\end{equation}
+ where the $C(a_f,s_i )$ represents the probability of activity $a_f$ in the $i$th time slot $s_i$. $F(a_f,s_{i-1})$ shows the original frequent of activity $a_f$ in the $i-1$th time slot $s_{i-1}$. $M(a_p,a_f )$ is the activity transition distribition of activity $a_f$ from activity $a_p$. The Time-Activity Model is formed as following:
+\begin{equation}
+P(a|u,t)=C(a,t|u)
+\end{equation}
+
+
+%To evaluate activity-time model, $P(a | t, u)$, we observe the histogram of different activities over the time in a day in Figure \ref{fig:activity_time}. Figure \ref{fig:activity_time} shows the a user has significantly different  frequent patterns in one day under different activities. In \cite{06_WWW_Mei}, the authors exploit PLSA to infer spatial-temporal topics in social networks. In our work, we tackle only temporal activity inference in LBSNs. We think that the relations between activity and time are similar to the idea of collaborative filtering. The activity and time factor can be represented as different latent features. For example, the transportation activity is related to whether there is available trains from office to home, and there are some available trains from office to home in the afternoon. Thus, the probability is higher when the activity is transportation in the afternoon. According to the above idea, we propose non-negative matrix factorization technique to capture the latent features between activity and time factor.
+
+%{\color{red} [xxx] } 
+
+%
+%Non-negative Matrix Factorization
+%
+%matrix factorization
+
+
+%$${\arg\min}_{M,N} \| V-MN \|_F^2 + \lambda_1 \| M \|_F^2 + \lambda_2 \| N \|_F^2 $$
+
+%$$J(M,N) =  \| V-MN \|_F^2 + \lambda( \| M \|_F^2 + \| N \|_F^2 ) $$
+
+%$${\arg\min}_{M,N} J(M,N)$$
+
+\section{Location-Activity Model, $P(\ell | a, u)$}
+\label{sec:4-5}
+
+%{\color{red} Figure \ref{fig:} shows the check-in location distribution of a user with different activities.}
+To capture the individual mobility with different activities, we analyze the check-in records with different activities.  The results reflect users have different check-in patterns with different activities. Prior works utilize two-dimensional Gaussian distribution to model mobility from trajectories \cite{06_Nature_Brockmann}\cite{08_Nature_Gonzalez}\cite{11_KDD_Cho}\cite{13_CIKM_Gao}\cite{14_KDD_Lichman}. We summarize the idea of above works, we exploit Gaussian mixture model to capture individual mobility under different activities. The location-activity model $P(\ell | a, u)$ can be represented as follows:
+
+\begin{equation}
+\label{equ:location-activity}
+P(\ell | a, u) = \sum_{i=1}^{k} \alpha_{i}\mathcal{N}(\mu_{i}, \Sigma_{i})
+\end{equation}
+where $\mu_{i}$ and $\Sigma_{i}$ denote the mean and covariance matrix of $i$-th Gaussian distribution, respectively. $k$ denotes the number of the Gaussian distributions in the model, and $\alpha_{i}$ denotes the probability of $\ell$ belonging to $i$-th Gaussian distribution.
+
+To discover suitable parameters of the location-activity model for each user, we distinct check-in records into different activities, and exploit Expectation--maximization (EM) algorithm to learn the parameters of $\alpha_{i}$, $\mu_{i}$ and $\Sigma_{i}$ for each activity. To determine the best $k$ for each activity, we run EM algorithm several times for $k$ from $1$ to $10$, and select the $k$ which has the greatest log-likelihood value.
+
+
+\section{Performing Activity and Mobility Inference}
+\label{sec:4-6}
+\subsection{Constructing Time-Activity Model}
+To construct the Time-Activity Model, we first input the set of time $t$ and activity $a$ of a user $u$ as our training set $TRAIN = {(u, t, a)}$, and define the initial value of two matrixes, which are $activity-time-weekday$ and $activity-time-weekend$. Both of the matrixes are $|ACT|*|Slot|$ matrix, where $|ACT|$ is the number of activity types, $|Slot|$ is the number of slots, and the initial value are zeros. Second, we record the number of check-ins into the corresponding matrix $F$. For example, a user $u$ checks in at time $t$ with activity label $a$ on Friday. We add this check-in to $F[a,slot] = F[a,slot] + 1$. Then, construct the $|ACT|*|ACT|$ activity transition matrix $M$ with Equation \ref{equ:order1}, where $M(a_p,a_f)$ is the activity transition matrix, which represents the transition probability of activity $a_f$ from activity $a_p$, and $F(a_f , s_{i−1})$ is the frequent matrix, which shows the original frequency of activity $a_f$ in the $i-1$th time slot. Finally, fill both the $activity-time-weekday$ and $activity-time-weekend$ matrixes with Equation \ref{equ:fill blank}. Since different time slot length will lead to various results. We test the time slot length from 1 to 4 hours and choose the best length for each user as the output time-activity model.
+
+\subsection{Constructing Location-Activity Model}
+
+With input training set $TRAIN = {(u, l, a)}$, we construct the location-activity model with Equation \ref{equ:location-activity}. To fit the parameters of the location-activity model, we perform the Expectation-Maximization Algorithm (EM) to fit the parameters. Note that there may be more than one frequent region in the location distribution for each activity. Given $k$, we first label each location point randomly as $cluster 1$, $cluster 2$, ..., to $cluster k$. The parameters, namely $\mu$ and $\sigma$, of the first iteration are fitted by using maximum likelihood estimation. This fitting step is known as the $E-step$. According to the current $\mu$ and $\sigma$, we reassign these location points to the $k$ clusters. This step is known as the $M-step$. This process is repeated until convergence. Since the EM algorithm is known to converge only to the local optima, we overcome this problem by testing $k$ from 1 to 10 and performing various initial region assignments to find the best fit with the highest likelihood.
+
+
+\subsection{Performing Activity Inference}
+
+After constructing both the time-activity model and the location-activity model, the entire model is shown as bellow:
+%\begin{lstlisting}
+\texttt{ \{
+	"user1":\{
+		"time-model":\{
+			act-time-weekday,
+			act-time-weekend
+		\},
+		"location-model":\{
+			category1,
+			category2, ... ,
+			category10
+		\}
+	\}, ...
+	"userN":\{
+		...
+	\}
+\} }
+%\end{lstlisting}
+\\
+The model contains $N$ subsets. Each subset stands for one user. For each user, there are $time-model$ and $location-model$, which are constructed by $activity-time-model$ and the $location-activity-model$, respectively. In $time-model$, there are two models for user doing activities on weekday and weekend, respectively. In $location-model$, there are 10 GMMs for activity/category from 1 to 10, respectively. 
+
+With input $TESTING = {(u,t,\ell)}$, where time $t$ happened on weekday/weekend and is mapped to slot $s$, we calculate the probability for 10 categories $P(a_i) = act-time-weekday[a_i, slot] \times location-model(category_i, \ell)$ for $i = 1:10$. Then, choose the activity, which has the highest probability as our output.
+
+\subsection{Performing Mobility Inference}
+
+According to the input $TESTING = {(u, t, a)}$, where user $u$ is doing activity $a$ at time $t$, we can calculate the probability of each location $\ell$. Then, select the location, which has the highest probability as our output.
+
+
+%{\bf Complexity Analysis:}
+
+%{\color{red} [needs rewrite] } 

@@ -1,0 +1,49 @@
+\chapter{Preliminaries}
+\label{sec:3}
+
+
+\section{Notations and Problem Definitions}
+In this section, we will give the formal definition of individual activity inference problem in LBSNs. First, we define the activities we concerned in this paper. The details are as follows.
+
+\begin{definition}{\bf{Categories/Activities}}
+\label{def:activity}
+\\
+There are ten types of categories from Foursquare we concerned in this work, which are Arts \& Entertainment $(AE)$, Colleges \& Universities $(CU)$, Events $(E)$, Food $(F)$, Nightlife Spots $(NS)$, Outdoors \& Recreation $(OR)$, Professional \& Other Places $(PO)$, Residences $(R)$, Shops \& Services $(SS)$, and Travel \& Transport $(TT)$. We regard the ten categories as user activities in this paper. Hence, the activity set $A= \{AE,CU,E,F,NS,OR,PO,R,SS,TT\}$.
+\end{definition}
+
+Then, the definition of check-in records in an LBSN is as follows.
+
+\begin{definition}{\bf{Check-in Records in an LBSN}}
+\label{def:checkin}
+\\
+The set of check-in records in an LBSN $C = \{(u, a, \ell, t)\}$, where $(u, a, \ell, t)$ denotes a check-in record that a user $u$ performs activity $a$ at location $\ell$ at time $t$, and $\ell \in L$. A location $\ell$ is a coordinate which consists of latitude and longitude.
+\end{definition}
+
+
+Finally, the definition of our target problems in this paper are as follows:
+
+\begin{definition}{\bf{Individual Activity Inference Problem}}
+\label{def:problem1}
+\\
+Given a check-in record set $C$ in an LBSN, we aim to evaluate the probability of user $u$ performing an activity $a$ at location $\ell$ at time $t$, denoted by $P(a|u, \ell, t)$.
+\end{definition}
+and
+\begin{definition}{\bf{Individual Mobility Inference Problem}}
+\label{def:problem1}
+\\
+Given a check-in record set $C$ in an LBSN, we aim to find the location distribution of user $u$ performing an activity $a$ at time $t$, denoted by $P(\ell | u, a, t)$.
+\end{definition}
+
+
+
+\section{Framework}
+\begin{figure}[t]
+\centering
+\epsfig{file=figures/framework.eps,width=0.9\linewidth}
+\caption{The framework for activity and mobility influence}
+\label{fig:framework}
+\end{figure}
+
+Figure \ref{fig:framework} shows the framework for individual activity and mobility inference in LBSNs. The input check-in records contain the information of user, time, location and activity. In the offline stage, the two major component models, time-activity and location-activity model, capture the behavior among location, time and activity factors. In the online stage, our framework accepts two types of queries, individual activity and mobility inference. The two inference functions are based on the two models constructed in offline. In the following section, we will describe how to evaluate $P(a|u, \ell, t)$, $P(\ell | u, a, t)$ and each component in detail.
+
+

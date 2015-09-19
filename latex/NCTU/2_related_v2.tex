@@ -1,0 +1,13 @@
+\chapter{Related Works}
+\label{sec:2}
+
+
+Prior works try to capture user activity behavior using sensors equipped on mobile devices \cite{11_UbiComp_Lane}\cite{14_UbiComp_Lane}. These approaches \cite{11_UbiComp_Lane}\cite{14_UbiComp_Lane} utilize the sensors, such as location-aware sensors, accelerometer, to monitor and recognize the activity of users. However, in LBSNs, the check-in records only contain spatial and temporal information. Moreover, the check-in records have spatial-temporal sparsity issue. It means that a user may only have less than 100 check-in records. Thus, the approaches using sensors \cite{11_UbiComp_Lane}\cite{14_UbiComp_Lane} are not eligible to infer individual user activity in LBSNs.
+
+
+Some approaches focus on infer user activity from trajectories \cite{08_UbiComp_Zheng}\cite{10_WWW_Zheng}\cite{04_AAAI_Liao}\cite{03_UbiComp_Patterson}. In \cite{03_UbiComp_Patterson}\cite{08_UbiComp_Zheng}, the authors try to detect the transportation modes from trajectories, such as walking and driving.In \cite{10_WWW_Zheng}, the authors discover the relations of activity and location, and exploit the matrix factorization technique to model the relations. However, the model can not extract personalize location activity . Moreover, the environment of LBSNs does not allow the platforms sustained collect data. Thus, the above approaches are not eligible in LBSNs.
+
+
+In LBSNs, \cite{11_KDD_Ye}, the authors try to guess the tags of each location in LBSNs based on check-in records. However, the tags describe each location for all users. Some locations contain multiple facilities. For example, a university has offices, classrooms and food court. Users visit the university have different activities, such as studying and dining. Therefore, the above approve approaches \cite{08_UbiComp_Zheng}\cite{10_WWW_Zheng}\cite{11_KDD_Ye} are not eligible to solve our target problem.
+
+
