@@ -1,0 +1,26 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces User's check-in records and activities in an LBSN}}{3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The framework for activity and mobility influence}}{7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The Bayesian network structure describes the relation among time, activity and location factors}}{9}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Temporal distribution over time, where the gray bar shows the frequency of each activity}}{11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Shop \& Service}}}{11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Nightlife Spot}}}{11}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Outdoor \& Recreation}}}{11}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Food}}}{11}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Impact of time slot length and the training size}}{19}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Impact of time slot length}}}{19}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Average accuracy vs. training size}}}{19}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Comparison of activity inference methods}}{20}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Average accuracy vs. categories}}}{20}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {The CDF of accuracy}}}{20}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Comparison of location inference methods}}{21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{21}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{21}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{21}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {}}}{21}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {The average log-likelihood of users on categories}}}{21}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

@@ -1,0 +1,124 @@
+\begin{thebibliography}{10}
+
+\bibitem{06_Nature_Brockmann}
+D.~Brockmann, L.~Hufnagel, and T.~Geisel.
+\newblock The scaling laws of human travel.
+\newblock {\em Nature}, 439:462–--465, January 2006.
+
+\bibitem{11_KDD_Cho}
+E.~Cho, S.~A. Myers, and J.~Leskovec.
+\newblock Friendship and mobility: user movement in location-based social
+  networks.
+\newblock In {\em ACM KDD}, 2011.
+
+\bibitem{10_EMNLP_Eisenstein}
+J.~Eisenstein, B.~O'Connor, N.~A. Smith, and E.~P. Xing.
+\newblock A latent variable model for geographic lexical variation.
+\newblock In {\em EMNLP}, 2010.
+
+\bibitem{13_CIKM_Gao}
+H.~Gao, J.~Tang, X.~Hu, and H.~Liu.
+\newblock Modeling temporal effects of human mobile behavior on location-based
+  social networks.
+\newblock In {\em ACM CIKM}, 2013.
+
+\bibitem{08_Nature_Gonzalez}
+M.~C. Gonzalez, C.~A. Hidalgo, and A.-L. Barabasi.
+\newblock Understanding individual human mobility patterns.
+\newblock {\em Nature}, 453:779--782, June 2008.
+
+\bibitem{11_Book_Han}
+J.~Han, M.~Kamber, and J.~Pei.
+\newblock {\em Data Mining: Concepts and Techniques}.
+\newblock Morgan Kaufmann, 3rd edition, 2011.
+
+\bibitem{12_WWW_Hong}
+L.~Hong, A.~Ahmed, S.~Gurumurthy, A.~J. Smola, and K.~Tsioutsiouliklis.
+\newblock Discovering geographical topics in the twitter stream.
+\newblock In {\em WWW}, 2012.
+
+\bibitem{14_UbiComp_Lane}
+N.~D. Lane, L.~Pengyu, L.~Zhou, and F.~Zhao.
+\newblock Connecting personal-scale sensing and networked community behavior to
+  infer human activities.
+\newblock In {\em ACM UbiComp}, 2014.
+
+\bibitem{11_UbiComp_Lane}
+N.~D. Lane, Y.~Xu, H.~Lu, S.~Hu, T.~Choudhury, A.~T. Campbell, and F.~Zhao.
+\newblock Enabling large-scale human activity inference on smartphones using
+  community similarity networks ({CSN}).
+\newblock In {\em ACM UbiComp}, 2011.
+
+\bibitem{04_AAAI_Liao}
+L.~Liao, D.~Fox, and H.~A. Kautz.
+\newblock Learning and inferring transportation routines.
+\newblock In {\em AAAI}, 2004.
+
+\bibitem{14_KDD_Lichman}
+M.~Lichman and P.~Smyth.
+\newblock Modeling human location data with mixtures of kernel densities.
+\newblock In {\em ACM KDD}, 2014.
+
+\bibitem{06_WWW_Mei}
+Q.~Mei, C.~Liu, H.~Su, and C.~Zhai.
+\newblock A probabilistic approach to spatiotemporal theme pattern mining on
+  weblogs.
+\newblock In {\em WWW}, 2006.
+
+\bibitem{11_ICWSM_Noulas}
+A.~Noulas, S.~Scellato, C.~Mascolo, and M.~Pontil.
+\newblock An empirical study of geographic user activity patterns in
+  foursquare.
+\newblock In {\em AAAI ICWSM}, 2011.
+
+\bibitem{03_UbiComp_Patterson}
+D.~J. Patterson, L.~Liao, D.~Fox, and H.~A. Kautz.
+\newblock Inferring high-level behavior from low-level sensors.
+\newblock In {\em UbiComp}, 2003.
+
+\bibitem{10_AAAI_Peebles}
+D.~Peebles, H.~Lu, N.~D. Lane, T.~Choudhury, and A.~T. Campbell.
+\newblock Community-guided learning: Exploiting mobile sensor users to model
+  human behavior.
+\newblock In {\em AAAI}, 2010.
+
+\bibitem{10_WSDM_Sizov}
+S.~Sizov.
+\newblock Geofolk: Latent spatial semantics in web 2.0 social media.
+\newblock In {\em ACM WSDM}, 2010.
+
+\bibitem{11_KDD_Ye}
+M.~Ye, D.~Shou, W.-C. Lee, P.~Yin, and K.~Janowicz.
+\newblock On the semantic annotation of places in location-based social
+  networks.
+\newblock In {\em ACM KDD}, 2011.
+
+\bibitem{11_SIGIR_Ye}
+M.~Ye, P.~Yin, W.-C. Lee, and D.-L. Lee.
+\newblock Exploiting geographical influence for collaborative point-of-interest
+  recommendation.
+\newblock In {\em ACM SIGIR}, 2011.
+
+\bibitem{13_KDD_Yuan}
+Q.~Yuan, G.~Cong, Z.~Ma, A.~Sun, and N.~Magnenat-Thalmann.
+\newblock Who, where, when and what: discover spatio-temporal topics for
+  twitter users.
+\newblock In {\em ACM KDD}, 2013.
+
+\bibitem{10_WWW_Zheng}
+V.~W. Zheng, Y.~Zheng, X.~Xie, and Q.~Yang.
+\newblock Collaborative location and activity recommendations with gps history
+  data.
+\newblock In {\em WWW}, 2010.
+
+\bibitem{08_UbiComp_Zheng}
+Y.~Zheng, Q.~Li, Y.~Chen, X.~Xie, and W.-Y. Ma.
+\newblock Understanding mobility based on gps data.
+\newblock In {\em UbiComp}, 2008.
+
+\bibitem{13_MUM_Zhu}
+Z.~Zhu, U.~Blanke, A.~Calatroni, and G.~Tr\"{o}ster.
+\newblock Human activity recognition using social media data.
+\newblock In {\em MUM}, 2013.
+
+\end{thebibliography}
