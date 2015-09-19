@@ -36,15 +36,18 @@ act_act<-matrix(nrow = 10, ncol = 10,
   file_all<-read.table(file = sprintf("%s.txt",tmptrainingfilename),col.names=c("ID","lon","lat","year","month","date","hour","min","day","act","datatype","Freq","category"),quote="",sep=",",stringsAsFactors=F) ## testing data  ,stringsAsFactors=F
   testing_all<-read.table(file = sprintf("%s_SVM.txt",tmptestingfilename),col.names=c("ID","lon","lat","year","month","date","hour","min","day","act","datatype","Freq","category","NB","SVM","CLAR","NMF","NBAIM"),quote="",sep=",",stringsAsFactors=F) ## testing data  ,stringsAsFactors=F
   print(paste("file_all =",nrow(file_all), ", nrow(testing_all =",nrow(testing_all)))
+  test_lon<-testing_all$lon
   file_all$ID<-as.character(file_all$ID)
   file_all$ID<-as.factor(file_all$ID)
   testing_all$ID<-as.character(testing_all$ID)
   testing_all$ID<-as.factor(testing_all$ID)
 
-  file_all$lon<-as.numeric(file_all$lon)
-  file_all$lat<-as.numeric(file_all$lat)
-  testing_all$lon<-as.numeric(testing_all$lon)
-  testing_all$lat<-as.numeric(testing_all$lat)
+  file_all$lon<-as.numeric(data.matrix(file_all$lon))
+  testing_all$lon<-as.numeric(data.matrix(testing_all$lon))
+
+  file_all$lat<-as.numeric(data.matrix(file_all$lat))
+  testing_all$lat<-as.numeric(data.matrix(testing_all$lat))
+  file_all<-file_all[which(!is.na(file_all$lon)),]
 
   file_100<-file_all[which(file_all$Freq>=10),]
   file_all<-file_100
@@ -56,6 +59,7 @@ act_act<-matrix(nrow = 10, ncol = 10,
   mydata<- cbind(as.numeric(file_all$lon),as.numeric(file_all$lat))
   # Determine number of clusters
   wss <- (nrow(mydata)-1)*sum(apply(mydata,2,var),na.rm=TRUE)
+  k<-1
   #wss<-0
   # centers<-NULL
   # center_num<-0
@@ -70,10 +74,15 @@ c<-0
     for (i in 2:100){
       yy<-try(kmeans(mydata, centers=i),silent=TRUE)
       if(!(class(yy)=="try-error")[1]){
-c<-c+1
-print(c)
+        c<-c+1
+        print(c)
         wss[i] <- sum(yy$withinss)
-        mk<-i
+        if(wss[i]>=min(wss[1:i-1],na.rm=TRUE)){
+          k<-i
+          fit<-yy
+          center<-fit$centers
+        }
+        # k<-i
         # tmp<-kmeans(mydata,center = i)
         # if(min(tmp$withinss) < min_withinss){
         #   fit<-tmp
@@ -87,15 +96,15 @@ print(c)
       }
       print(i)
     }
-    k<-which(wss==min(wss))
-    fit <- kmeans(mydata, k) # k cluster solution
-    center<-fit$centers
+    # k<-which(wss==min(wss))
+    # fit <- kmeans(mydata, k) # k cluster solution
+    # center<-fit$centers
     file_all<-cbind(file_all,fit$cluster)
     colnames(file_all)[14]<-"cluster"
     cluster_data<-lapply(1:nrow(center),function(i) data.frame())
 
-    for(i in 1:nrow(file_all)){
-      cluster_data[[file_all$cluster[i]]]<-rbind(cluster_data[[file_all$cluster[i]]],file_all[i,])
+    for(i in 1:nrow(center)){
+      cluster_data[[i]]<-file_all[which(file_all$cluster==i),]
     }
     location_activity<-matrix(nrow = (length(cluster_data)),ncol = 10, 0)
     location_feature<-matrix(nrow = (length(cluster_data)),ncol = 10, 0)
@@ -122,6 +131,10 @@ print(c)
     #### testing stage ####
     predict_act<-0
     for(i in 1:nrow(testing_all)){
+      if(is.na(testing_all$lon[i])==TRUE){
+        testing_all$CLAR[i]<-sample(10,1)
+        next
+      }
       c_n<-1
       c_dis<-distHaversine(data.matrix(testing_all[i,2:3]),center[1,])
       for(c in 1:nrow(center)){
@@ -142,16 +155,17 @@ print(c)
         print(paste(i," is done"))
       }
     }
+    testing_all$lon<-test_lon
     cdf<-CDF(testing_all$ID,testing_all$category,predict_act)
     cdf<-cdf[which(!is.na(cdf))]
-    write.table(cdf,file= cdffile,sep = ",", col.names = FALSE,row.names = FALSE,quote = FALSE)
+    #write.table(cdf,file= cdffile,sep = ",", col.names = FALSE,row.names = FALSE,quote = FALSE)
     #print(cdf)
     acc<-predictive_accuracy(testing_all$category,predict_act,10)
     accuracy<-acc$accuracy
     Tguess<-acc$T_guess
     #print(Tguess)
     print(accuracy)
-    write.table(accuracy,file= resultaccfile,sep = ",", col.names = FALSE,row.names = FALSE,quote = FALSE)
+    #write.table(accuracy,file= resultaccfile,sep = ",", col.names = FALSE,row.names = FALSE,quote = FALSE)
     write.table(testing_all,file= sprintf('%s_CLAR.txt',tmptestingfilename),sep = ",", col.names = FALSE,row.names = FALSE,quote = FALSE)
 
       
